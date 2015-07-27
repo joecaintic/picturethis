@@ -1,6 +1,29 @@
 source 'https://rubygems.org'
 
+gem 'rmagick', '~> 2.15.2'
 
+gem "mini_magick"
+
+gem 'carrierwave'
+
+gem 'faye'
+
+gem 'devise'
+
+gem 'pundit'
+
+gem 'faker'
+
+gem 'figaro', '1.0'
+gem 'annotate'
+
+gem 'pg'
+
+gem 'bootstrap-sass'
+
+gem "private_pub"
+gem "thin"
+gem 'uglifier', '>= 1.3.0'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.1'
 # Use sqlite3 as the database for Active Record
@@ -42,4 +65,3 @@ group :development, :test do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
 end
-
