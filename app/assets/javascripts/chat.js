@@ -9,55 +9,46 @@
 
  var chatboxFocus = new Array();
 var chatBoxes = new Array();
- 
+
 var ready = function () {
- 
+
     chatBox = {
- 
+
         /**
          * creates an inline chatbox on the page by calling the
          * createChatBox function passing along the unique conversation_id
-         * 
+         *
          * @param conversation_id
          */
- 
+
         chatWith: function (conversation_id) {
- 
+
             chatBox.createChatBox(conversation_id);
             $("#chatbox_" + conversation_id + " .chatboxtextarea").focus();
         },
- 
+
         /**
          * closes the chatbox by essentially hiding it from the page
-         * 
+         *
          * @param conversation_id
          */
- 
+
         close: function (conversation_id) {
             $('#chatbox_' + conversation_id).css('display', 'none');
             chatBox.restructure();
         },
- 
-        /**
-         * Plays a notification sound when a new chat message arrives
-         */
- 
-        notify: function () {
-            var audioplayer = $('#chatAudio')[0];
-            audioplayer.play();
-        },
- 
+
         /**
          * Handles 'smart layouts' of the chatboxes. Like when new chatboxes are
          * added or removed from the view, it restructures them so that they appear
          * neatly aligned on the page
          */
- 
+
         restructure: function () {
             align = 0;
             for (x in chatBoxes) {
                 chatbox_id = chatBoxes[x];
- 
+
                 if ($("#chatbox_" + chatbox_id).css('display') != 'none') {
                     if (align == 0) {
                         $("#chatbox_" + chatbox_id).css('right', '20px');
@@ -68,9 +59,9 @@ var ready = function () {
                     align++;
                 }
             }
- 
+
         },
- 
+
         /**
          * Takes in two parameters. It is responsible for fetching the specific conversation's
          * html page and appending it to the body of our home page e.g if conversation_id = 1
@@ -82,7 +73,7 @@ var ready = function () {
          * @param conversation_id
          * @param minimizeChatBox
          */
- 
+
         createChatBox: function (conversation_id, minimizeChatBox) {
             if ($("#chatbox_" + conversation_id).length > 0) {
                 if ($("#chatbox_" + conversation_id).css('display') == 'none') {
@@ -92,36 +83,36 @@ var ready = function () {
                 $("#chatbox_" + conversation_id + " .chatboxtextarea").focus();
                 return;
             }
- 
+
             $("body").append('<div id="chatbox_' + conversation_id + '" class="chatbox"></div>')
- 
+
             $.get("conversations/" + conversation_id, function (data) {
                 $('#chatbox_' + conversation_id).html(data);
                 $("#chatbox_" + conversation_id + " .chatboxcontent").scrollTop($("#chatbox_" + conversation_id + " .chatboxcontent")[0].scrollHeight);
             }, "html");
- 
+
             $("#chatbox_" + conversation_id).css('bottom', '0px');
- 
+
             chatBoxeslength = 0;
- 
+
             for (x in chatBoxes) {
                 if ($("#chatbox_" + chatBoxes[x]).css('display') != 'none') {
                     chatBoxeslength++;
                 }
             }
- 
+
             if (chatBoxeslength == 0) {
                 $("#chatbox_" + conversation_id).css('right', '20px');
             } else {
                 width = (chatBoxeslength) * (280 + 7) + 20;
                 $("#chatbox_" + conversation_id).css('right', width + 'px');
             }
- 
+
             chatBoxes.push(conversation_id);
- 
+
             if (minimizeChatBox == 1) {
                 minimizedChatBoxes = new Array();
- 
+
                 if ($.cookie('chatbox_minimized')) {
                     minimizedChatBoxes = $.cookie('chatbox_minimized').split(/\|/);
                 }
@@ -131,15 +122,15 @@ var ready = function () {
                         minimize = 1;
                     }
                 }
- 
+
                 if (minimize == 1) {
                     $('#chatbox_' + conversation_id + ' .chatboxcontent').css('display', 'none');
                     $('#chatbox_' + conversation_id + ' .chatboxinput').css('display', 'none');
                 }
             }
- 
+
             chatboxFocus[conversation_id] = false;
- 
+
             $("#chatbox_" + conversation_id + " .chatboxtextarea").blur(function () {
                 chatboxFocus[conversation_id] = false;
                 $("#chatbox_" + conversation_id + " .chatboxtextarea").removeClass('chatboxtextareaselected');
@@ -148,17 +139,17 @@ var ready = function () {
                 $('#chatbox_' + conversation_id + ' .chatboxhead').removeClass('chatboxblink');
                 $("#chatbox_" + conversation_id + " .chatboxtextarea").addClass('chatboxtextareaselected');
             });
- 
+
             $("#chatbox_" + conversation_id).click(function () {
                 if ($('#chatbox_' + conversation_id + ' .chatboxcontent').css('display') != 'none') {
                     $("#chatbox_" + conversation_id + " .chatboxtextarea").focus();
                 }
             });
- 
+
             $("#chatbox_" + conversation_id).show();
- 
+
         },
- 
+
         /**
          * Responsible for listening to the keypresses when chatting. If the Enter button is pressed,
          * we submit our conversation form to our rails app
@@ -167,14 +158,14 @@ var ready = function () {
          * @param chatboxtextarea
          * @param conversation_id
          */
- 
+
         checkInputKey: function (event, chatboxtextarea, conversation_id) {
             if (event.keyCode == 13 && event.shiftKey == 0) {
                 event.preventDefault();
- 
+
                 message = chatboxtextarea.val();
                 message = message.replace(/^\s+|\s+$/g, "");
- 
+
                 if (message != '') {
                     $('#conversation_form_' + conversation_id).submit();
                     $(chatboxtextarea).val('');
@@ -182,10 +173,10 @@ var ready = function () {
                     $(chatboxtextarea).css('height', '44px');
                 }
             }
- 
+
             var adjustedHeight = chatboxtextarea.clientHeight;
             var maxHeight = 94;
- 
+
             if (maxHeight > adjustedHeight) {
                 adjustedHeight = Math.max(chatboxtextarea.scrollHeight, adjustedHeight);
                 if (maxHeight)
@@ -195,60 +186,60 @@ var ready = function () {
             } else {
                 $(chatboxtextarea).css('overflow', 'auto');
             }
- 
+
         },
- 
+
         /**
          * Responsible for handling minimize and maximize of the chatbox
          *
          * @param conversation_id
          */
- 
+
         toggleChatBoxGrowth: function (conversation_id) {
             if ($('#chatbox_' + conversation_id + ' .chatboxcontent').css('display') == 'none') {
- 
+
                 var minimizedChatBoxes = new Array();
- 
+
                 if ($.cookie('chatbox_minimized')) {
                     minimizedChatBoxes = $.cookie('chatbox_minimized').split(/\|/);
                 }
- 
+
                 var newCookie = '';
- 
+
                 for (i = 0; i < minimizedChatBoxes.length; i++) {
                     if (minimizedChatBoxes[i] != conversation_id) {
                         newCookie += conversation_id + '|';
                     }
                 }
- 
+
                 newCookie = newCookie.slice(0, -1)
- 
- 
+
+
                 $.cookie('chatbox_minimized', newCookie);
                 $('#chatbox_' + conversation_id + ' .chatboxcontent').css('display', 'block');
                 $('#chatbox_' + conversation_id + ' .chatboxinput').css('display', 'block');
                 $("#chatbox_" + conversation_id + " .chatboxcontent").scrollTop($("#chatbox_" + conversation_id + " .chatboxcontent")[0].scrollHeight);
             } else {
- 
+
                 var newCookie = conversation_id;
- 
+
                 if ($.cookie('chatbox_minimized')) {
                     newCookie += '|' + $.cookie('chatbox_minimized');
                 }
- 
- 
+
+
                 $.cookie('chatbox_minimized', newCookie);
                 $('#chatbox_' + conversation_id + ' .chatboxcontent').css('display', 'none');
                 $('#chatbox_' + conversation_id + ' .chatboxinput').css('display', 'none');
             }
- 
+
         }
- 
- 
- 
+
+
+
     }
- 
- 
+
+
     /**
      * Cookie plugin
      *
@@ -258,7 +249,7 @@ var ready = function () {
      * http://www.gnu.org/licenses/gpl.html
      *
      */
- 
+
     jQuery.cookie = function (name, value, options) {
         if (typeof value != 'undefined') { // name and value given, set cookie
             options = options || {};
@@ -300,9 +291,80 @@ var ready = function () {
             return cookieValue;
         }
     };
- 
- 
+
+
 }
- 
+
+$(document).ready(ready);
+$(document).on("page:load", ready);
+
+var ready = function () {
+
+    /**
+     * When the send message link on our home page is clicked
+     * send an ajax request to our rails app with the sender_id and
+     * recipient_id
+     */
+
+    $('.start-conversation').click(function (e) {
+        e.preventDefault();
+
+        var sender_id = $(this).data('sid');
+        var recipient_id = $(this).data('rip');
+
+        $.post("/conversations", { sender_id: sender_id, recipient_id: recipient_id }, function (data) {
+            chatBox.chatWith(data.conversation_id);
+        });
+    });
+
+    /**
+     * Used to minimize the chatbox
+     */
+
+    $(document).on('click', '.toggleChatBox', function (e) {
+        e.preventDefault();
+
+        var id = $(this).data('cid');
+        chatBox.toggleChatBoxGrowth(id);
+    });
+
+    /**
+     * Used to close the chatbox
+     */
+
+    $(document).on('click', '.closeChat', function (e) {
+        e.preventDefault();
+
+        var id = $(this).data('cid');
+        chatBox.close(id);
+    });
+
+
+    /**
+     * Listen on keypress' in our chat textarea and call the
+     * chatInputKey in chat.js for inspection
+     */
+
+    $(document).on('keydown', '.chatboxtextarea', function (event) {
+
+        var id = $(this).data('cid');
+        chatBox.checkInputKey(event, $(this), id);
+    });
+
+    /**
+     * When a conversation link is clicked show up the respective
+     * conversation chatbox
+     */
+
+    $('a.conversation').click(function (e) {
+        e.preventDefault();
+
+        var conversation_id = $(this).data('cid');
+        chatBox.chatWith(conversation_id);
+    });
+
+
+}
+
 $(document).ready(ready);
 $(document).on("page:load", ready);
