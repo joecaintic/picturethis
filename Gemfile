@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+gem 'fog'
+
 gem 'rmagick', '~> 2.15.2'
 
 gem "mini_magick"
