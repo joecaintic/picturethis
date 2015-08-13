@@ -17,6 +17,7 @@
 //= require private_pub
 //= require bootstrap
 //= require chat
+//= require jquery.remotipart
 //= require_tree .
 
 

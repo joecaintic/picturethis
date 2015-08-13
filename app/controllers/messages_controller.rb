@@ -1,5 +1,6 @@
 class MessagesController < ApplicationController
-  before_filter :authenticate_user!
+  # before_filter :authenticate_user!
+  skip_before_filter :verify_authenticity_token
 
   def create
     @conversation = Conversation.find(params[:conversation_id])
@@ -9,6 +10,10 @@ class MessagesController < ApplicationController
     @new_message = Message.new
 
     @path = conversation_path(@conversation)
+
+    respond_to do |format|
+      format.js
+    end
   end
 
   private

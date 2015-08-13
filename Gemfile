@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+gem 'remotipart', '~> 1.2'
+
 gem 'fog'
 
 gem 'rmagick', '~> 2.15.2'
@@ -25,8 +27,7 @@ gem 'bootstrap-sass'
 
 gem "private_pub"
 gem "thin"
-gem 'uglifier', '>= 1.3.0'
-# Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
+
 gem 'rails', '4.2.1'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
