@@ -3,7 +3,8 @@
     <img src="http://placehold.it/50x50" />
   </div>
   <div class="chatboxmessagecontent">
-    <p><%= message.body || message.image %></p>
+    <%= image_tag(message.image) %>
+    <p><%= message.body %></p>
     <time datatime="<%= message.created_at %>" title="<%= message.created_at.strftime("%d %b %Y at %I:%M%p") %>">
       <%= message_interlocutor(message).name %> • <%= message.created_at.strftime("%H:%M %p") %>
     </time>
