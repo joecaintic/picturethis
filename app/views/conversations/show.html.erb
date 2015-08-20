@@ -17,8 +17,12 @@
    <div class='new-messages'>
   <%= form_for([@conversation, @message], remote: true, html: { id: "conversation_form_#{@conversation.id}"}, :multipart => true) do |f| %> <!-- note " :remote => true" was removed -->
       <div class = "new-text">
+        <p>Top</p>
         <%= f.text_area :body, class: "chatboxtextarea", "data-cid" => @conversation.id %>
+        <p>Bottom</p>
+        <%= f.text_area :body2, class: "chatboxtextarea", "data-cid" => @conversation.id %>
       </div>
+
       <div class= "new-image">
         <%= f.label :image %>
         <%= f.file_field :image %>

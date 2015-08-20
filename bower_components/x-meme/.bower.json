@@ -1,0 +1,37 @@
+{
+  "name": "x-meme",
+  "version": "0.0.3",
+  "authors": [
+    "Karan Goel <karan@goel.im>"
+  ],
+  "description": "The meme element for modern web",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "keywords": [
+    "meme",
+    "web-components",
+    "image",
+    "troll",
+    "yolo"
+  ],
+  "dependencies": {
+    "polymer": "Polymer/polymer#master"
+  },
+  "homepage": "https://github.com/karan/x-meme",
+  "_release": "0.0.3",
+  "_resolution": {
+    "type": "version",
+    "tag": "v0.0.3",
+    "commit": "556063e7f8483d3cfc07545f79c1c1a5c31c580a"
+  },
+  "_source": "git://github.com/karan/x-meme.git",
+  "_target": "~0.0.3",
+  "_originalSource": "x-meme",
+  "_direct": true
+}

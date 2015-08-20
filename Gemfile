@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+gem "bower-rails", "~> 0.10.0"
+
 gem 'remotipart', '~> 1.2'
 
 gem 'fog'
