@@ -26,6 +26,9 @@
 class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
+  require 'open-uri'
+  require 'meme_captain'
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
@@ -33,12 +36,23 @@ class User < ActiveRecord::Base
 
 after_create :create_default_conversation
 
+def meme
+  open('http://i.memecaptain.com/src_images/Dv99KQ.jpg', 'rb') do |f|
+    i = MemeCaptain.meme_top_bottom(f, 'test', '1 2 3')
+    # i.display
+    i.write('out.jpg')
+  end
+end
+
 private
 
 # for demo purposes
 
+
+
+
 def create_default_conversation
   Conversation.create(sender_id: 1, recipient_id: self.id) unless self.id == 1
 end
-  
+
 end

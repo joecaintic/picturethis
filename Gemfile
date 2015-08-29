@@ -4,6 +4,10 @@ gem "bower-rails", "~> 0.10.0"
 
 gem 'remotipart', '~> 1.2'
 
+gem 'memegen'
+
+gem 'meme_captain'
+
 gem 'fog'
 
 gem 'rmagick', '~> 2.15.2'

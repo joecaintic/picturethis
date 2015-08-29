@@ -92,6 +92,10 @@ GEM
     execjs (2.5.2)
     faker (1.4.3)
       i18n (~> 0.5)
+    faraday (0.9.1)
+      multipart-post (>= 1.2, < 3)
+    faraday_middleware (0.10.0)
+      faraday (>= 0.7.4, < 0.10)
     faye (1.1.1)
       cookiejar (>= 0.3.0)
       em-http-request (>= 0.3.0)
@@ -199,6 +203,7 @@ GEM
     formatador (0.2.5)
     globalid (0.3.5)
       activesupport (>= 4.1.0)
+    hashie (3.4.2)
     http_parser.rb (0.6.0)
     i18n (0.7.0)
     inflecto (0.0.2)
@@ -215,11 +220,18 @@ GEM
       nokogiri (>= 1.5.9)
     mail (2.6.3)
       mime-types (>= 1.16, < 3)
+    meme_captain (0.3.0)
+      mime-types
+      rmagick
+    memegen (1.0.7)
+      rmagick
+      tinder
     mime-types (2.6.1)
     mini_magick (4.2.3)
     mini_portile (0.6.2)
     minitest (5.7.0)
     multi_json (1.11.2)
+    multipart-post (2.0.0)
     net-scp (1.2.1)
       net-ssh (>= 2.6.5)
     net-ssh (2.9.2)
@@ -264,6 +276,7 @@ GEM
     responders (2.1.0)
       railties (>= 4.2.0, < 5)
     rmagick (2.15.2)
+    roauth (0.0.8)
     sass (3.4.16)
     sass-rails (5.0.3)
       railties (>= 4.0.0, < 5.0)
@@ -289,8 +302,20 @@ GEM
     thor (0.19.1)
     thread_safe (0.3.5)
     tilt (1.4.1)
+    tinder (1.10.1)
+      eventmachine (~> 1.0)
+      faraday (~> 0.9.0)
+      faraday_middleware (~> 0.9)
+      hashie (>= 1.0)
+      json (~> 1.8.0)
+      mime-types
+      multi_json (~> 1.7)
+      twitter-stream (~> 0.1)
     turbolinks (2.5.3)
       coffee-rails
+    twitter-stream (0.1.12)
+      eventmachine (>= 0.12.8)
+      roauth (>= 0.0.2)
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
     uglifier (2.7.1)
@@ -324,6 +349,8 @@ DEPENDENCIES
   fog
   jbuilder (~> 2.0)
   jquery-rails
+  meme_captain
+  memegen
   mini_magick
   pg
   private_pub
