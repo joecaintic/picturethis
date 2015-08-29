@@ -62,7 +62,14 @@
 
     </div>
     <hr>
+
     <h3>Your Conversations</h3>
+    <canvas id = "here">
+    </canvas>
+    <script>
+    var canvas = document.getElementById('here');
+    Meme('<%= image_url('wolf.jpg') %>', canvas, "I'm working w/ Joe", 'to take what\'s yours');
+    </script>
 
     <div style="height: 400px; overflow-y: auto;">
       <% if @conversations.any? %>
