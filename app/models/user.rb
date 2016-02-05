@@ -36,14 +36,6 @@ class User < ActiveRecord::Base
 
 after_create :create_default_conversation
 
-def meme
-  open('http://i.memecaptain.com/src_images/Dv99KQ.jpg', 'rb') do |f|
-    i = MemeCaptain.meme_top_bottom(f, 'test', '1 2 3')
-    # i.display
-    i.write('out.jpg')
-  end
-end
-
 private
 
 # for demo purposes

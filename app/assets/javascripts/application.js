@@ -18,6 +18,7 @@
 //= require bootstrap
 //= require chat
 //= require jquery.remotipart
+//= require meme
 //= require_tree .
 
 
