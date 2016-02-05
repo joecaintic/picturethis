@@ -10,7 +10,17 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
+//= require_self
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
+//= require private_pub
+//= require bootstrap
+//= require chat
+//= require jquery.remotipart
 //= require_tree .
+
+
+$(function() {
+  var faye = new Faye.Client('http://localhost:9292/faye');
+});

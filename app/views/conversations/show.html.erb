@@ -1,0 +1,36 @@
+<div class="chatboxhead">
+  <div class="chatboxtitle">
+    <i class="fa fa-comments"></i>
+
+    <h1><%= @receiver.name %> </h1>
+  </div>
+  <div class="chatboxoptions">
+    <%= link_to "<i class='fa fa-minus'></i> ".html_safe, "#", class: "toggleChatBox", "data-cid" => @conversation.id %>
+    &nbsp;&nbsp;
+    <%= link_to "<i class='fa fa-times'></i> ".html_safe, "#", class: "closeChat", "data-cid" => @conversation.id %>
+  </div>
+</div>
+<div class="chatboxcontent">
+      <%= render @messages %>
+</div>
+<div class="chatboxinput">
+   <div class='new-messages'>
+  <%= form_for([@conversation, @message], remote: true, html: { id: "conversation_form_#{@conversation.id}"}, :multipart => true) do |f| %> <!-- note " :remote => true" was removed -->
+      <div class = "new-text">
+        <p>Top</p>
+        <%= f.text_area :body, class: "chatboxtextarea", "data-cid" => @conversation.id %>
+        <p>Bottom</p>
+        <%= f.text_area :body2, class: "chatboxtextarea", "data-cid" => @conversation.id %>
+      </div>
+
+      <div class= "new-image">
+        <%= f.label :image %>
+        <%= f.file_field :image %>
+        <%= f.hidden_field :image_cache %>
+        <%= f.submit "Send", class: 'btn btn-success', "data-cid" => @conversation.id  %>
+      </div>
+  <% end %>
+  </div>
+</div>
+
+<%= subscribe_to conversation_path(@conversation) %>

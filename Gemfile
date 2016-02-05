@@ -1,7 +1,39 @@
 source 'https://rubygems.org'
 
+gem "bower-rails", "~> 0.10.0"
 
-# Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
+gem 'remotipart', '~> 1.2'
+
+gem 'memegen'
+
+gem 'meme_captain'
+
+gem 'fog'
+
+gem 'rmagick', '~> 2.15.2'
+
+gem "mini_magick"
+
+gem 'carrierwave'
+
+gem 'faye'
+
+gem 'devise'
+
+gem 'pundit'
+
+gem 'faker'
+
+gem 'figaro', '1.0'
+gem 'annotate'
+
+gem 'pg'
+
+gem 'bootstrap-sass'
+
+gem "private_pub"
+gem "thin"
+
 gem 'rails', '4.2.1'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
@@ -41,5 +73,5 @@ group :development, :test do
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+  gem 'annotate'
 end
-
